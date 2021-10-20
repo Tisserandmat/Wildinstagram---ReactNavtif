@@ -6,13 +6,16 @@ import CameraScreen from './screen/CameraScreen';
 import FeedScreen from './screen/FeedScreen';
 import { NavigationContainer } from '@react-navigation/native';                        // les différents packages installé
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from "@expo/vector-icons/Ionicons";                                   // néssaisaire a l'icone
+import Ionicons from "@expo/vector-icons/Ionicons";  
+                                 // néssaisaire a l'icone
 
 
 const Tab = createBottomTabNavigator();                                             // création des boutons de navigation
 
 export default function App() {
+  
   return (
+    
     <NavigationContainer>
       <Tab.Navigator screenOptions={({ route }) => ({                           //Utilisation du tab navigator pour pouvoir naviger entre les différentes pages
         tabBarIcon: ({ focused, color, size }) => {
@@ -29,11 +32,12 @@ export default function App() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         }, tabBarActiveTintColor: '#ed6c6d', tabBarInactiveTintColor: 'gray',
-      })}>
+     unmountOnBlur : true }) // unmoutOnBlur permet de ne pas avoir un ecran noir apres la premiere photo sur la cameraScreen
+    }>                                    
         <Tab.Screen name="FeedScreen" component={FeedScreen} />          
         <Tab.Screen name="CameraScreen" component={CameraScreen} />
         <Tab.Screen name="ImagesScreen" component={ImagesScreen} />
-
+        
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -46,4 +50,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+ 
 });
