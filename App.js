@@ -17,15 +17,19 @@ export default function App() {
       <Tab.Navigator screenOptions={({ route }) => ({                           //Utilisation du tab navigator pour pouvoir naviger entre les différentes pages
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;                                                       // variable pour l'icones
-          if (route.name === 'FeedScreen') {                                 // récupére la route du ficher FeedScreen depuis le name de <Tab.Screen name="FeedScreen" component={FeedScreen} />  
+          if (route.name === 'FeedScreen') {                               // récupére la route du ficher FeedScreen depuis le name de
+                                                                           //  <Tab.Screen name="FeedScreen" component={FeedScreen} />  
             iconName = focused ? 'home' : 'home-outline';                   // utilisation du ternaire pour focus ou non l'icone
           }
-          else if (route.name === 'CameraScreen')                         // récupére la route du ficher CameraScreen qui correspond au name de   <Tab.Screen name="CameraScreen" component={CameraScreen} />
+          else if (route.name === 'CameraScreen')                         // récupére la route du ficher CameraScreen qui correspond au name de 
+                                                                         // <Tab.Screen name="CameraScreen" component={CameraScreen} />
           { iconName = focused ? 'camera' : 'camera-outline'; }          // utilisation du ternaire pour focus ou non l'icone
 
-          else if (route.name === 'ImagesScreen')                      //récupére la route du ficher ImagesScreen qui correspond au name de  <Tab.Screen name="ImagesScreen" component={ImagesScreen} />
+          else if (route.name === 'ImagesScreen')                      //récupére la route du ficher ImagesScreen qui correspond au name de 
+                                                                      //  <Tab.Screen name="ImagesScreen" component={ImagesScreen} />
 
            { iconName = focused ? 'image' : 'image-outline'; }       // utilisation du ternaire pour focus ou non l'icone 
+                                                                    
 
           return <Ionicons name={iconName} size={size} color={color} />;
         }, tabBarActiveTintColor: '#ed6c6d', tabBarInactiveTintColor: 'gray',
