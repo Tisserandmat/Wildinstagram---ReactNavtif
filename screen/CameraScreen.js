@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";           // importe
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 import { Camera } from 'expo-camera';    // néssaisaire à la cameras
 import Ionicons from "@expo/vector-icons/Ionicons";
+import * as ImageManipulator from "expo-image-manipulator";
 
 
 
@@ -11,7 +12,7 @@ const CameraScreen = () => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const cameraRef = useRef(null);                      // utilisation des différents hooks
-    
+
 
     useEffect(() => {                                   // function useEffect qui est asynchrone     
         (async () => {
@@ -27,11 +28,11 @@ const CameraScreen = () => {
         return <Text>No access to camera</Text>;
     }
     return (
-        
+
         <>
             <View style={styles.container}>
 
-                <Camera style={styles.camera} ref ={cameraRef} type={type}>
+                <Camera style={styles.camera} ref={cameraRef} type={type}>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={styles.button}
@@ -47,30 +48,26 @@ const CameraScreen = () => {
                             />
                         </TouchableOpacity>
                     </View>
+
                     <View style={styles.viewPic}>
-
                         <Ionicons name="camera-outline" style={styles.iconePic} // icone pour prendre des photos
-
-
-
                             onPress={async () => {
-                                try{
+                                try {
                                     const pictureMetadata = await cameraRef.current.takePictureAsync();
-
-                                console.log("pictureMetadata", pictureMetadata);
+                                    console.log("pictureMetadata", pictureMetadata);
+                                    console.log(
+                                        await ImageManipulator.manipulateAsync(pictureMetadata.uri, [
+                                            { resize: { width: 800 } },
+                                        ])
+                                    );
                                 } catch (err) {
                                     console.log(err)
-                                } 
-                                
-
+                                }
                             }}
-
-                        /></View>
-
+                        />
+                        </View>
+                        
                 </Camera>
-
-
-
             </View>
         </>
     );
